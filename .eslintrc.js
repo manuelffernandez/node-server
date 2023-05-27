@@ -11,6 +11,8 @@ module.exports = {
     project: ['tsconfig.json']
   },
   rules: {
-    '@typescript-eslint/explicit-function-return-type': 'off'
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off'
   }
 }

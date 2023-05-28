@@ -1,11 +1,12 @@
 {
-  "name": "server",
+  "name": "user-management",
   "version": "1.0.0",
-  "description": "",
+  "description": "Application for users management",
   "main": "src/index.ts",
   "scripts": {
     "dev": "ts-node-dev --require tsconfig-paths/register src/index.ts",
-    "build": "tsc --esModuleInterop"
+    "build": "tsc --esModuleInterop",
+    "start": "tsc --esModuleInterop && node build/src/index.js"
   },
   "repository": {
     "type": "git",

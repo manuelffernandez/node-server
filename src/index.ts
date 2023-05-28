@@ -1,10 +1,14 @@
-import express from 'express'
-import * as dotenv from 'dotenv'
+import '@/configs/env'
+import httpServer from '@/configs/http'
+import connectDB from './configs/db'
 
-dotenv.config()
+const bootstrap = () => {
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  httpServer.listen(process.env.PORT, async () => {
+    await connectDB(process.env.MONGO_URL!)
 
-const expressApp = express()
+    console.log('SERVER RUNNING ON PORT ' + process.env.PORT!.toString())
+  })
+}
 
-expressApp.listen(process.env.PORT, () => {
-  console.log('SERVER RUNNING ON PORT  ' + process.env.PORT!.toString())
-})
+bootstrap()

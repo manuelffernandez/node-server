@@ -15,6 +15,18 @@ The communication should be done via a **REST API (HTTP requests)**.
 
 - **CRUD**: It let perform CRUD operations over the user registers.
 
+## Specifications
+
+The will be able to...
+
+- Register in the application by entering the necessary information.
+  - The email must be unique per user.
+- Authenticate with the application using their email and password.
+  - If the authentication is valid, the application will return an identifier that will serve to prove their identity to the application when they want to make changes to their data
+- Obtain all of their data, excluding their password, by utilizing their identifier.
+- Update their data by utilizing their identifier.
+- Delete all of their data (unregister).
+
 ## Run locally
 
 #### NodeJS

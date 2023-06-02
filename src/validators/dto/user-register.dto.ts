@@ -1,5 +1,5 @@
 import { Type } from '@sinclair/typebox'
-import { idDTOSchema, nameDTOSchema, middleNameDTOSchema, lastNameDTOSchema, emailDTOSchema, passwordDTOSchema } from './dto-schemas'
+import { idDTOSchema, nameDTOSchema, lastNameDTOSchema, emailDTOSchema, passwordDTOSchema } from './dto-schemas'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
 import addErrors from 'ajv-errors'
@@ -8,7 +8,6 @@ import type { Request, Response, NextFunction } from 'express'
 export const RegisterDTOSchema = Type.Object({
   _id: idDTOSchema,
   name: nameDTOSchema,
-  middleName: Type.Optional(middleNameDTOSchema),
   lastName: lastNameDTOSchema,
   email: emailDTOSchema,
   password: passwordDTOSchema

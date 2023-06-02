@@ -18,16 +18,6 @@ export const nameDTOSchema = Type.String({
   }
 })
 
-export const middleNameDTOSchema = Type.String({
-  minLength: 2,
-  maxLength: 20,
-  errorMessage: {
-    type: 'Invalid type error, must be a string',
-    minLength: 'Invalid format error, must contain at least 2 characters',
-    maxLength: 'Invalid format error, must not exceed 20 characters'
-  }
-})
-
 export const lastNameDTOSchema = Type.String({
   minLength: 2,
   maxLength: 20,

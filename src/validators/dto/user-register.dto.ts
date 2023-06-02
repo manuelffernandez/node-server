@@ -1,5 +1,5 @@
 import { Type } from '@sinclair/typebox'
-import { _id, name, middleName, lastName, email, password } from '@/lib/dto-schemas'
+import { _id, name, middleName, lastName, email, password } from './dto-schemas'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
 import addErrors from 'ajv-errors'
@@ -12,6 +12,11 @@ export const RegisterDTOSchema = Type.Object({
   lastName,
   email,
   password
+}, {
+  additionalProperties: false,
+  errorMessage: {
+    additionalProperties: 'Invalid format error, contains unrecognized additional properties'
+  }
 })
 
 const ajv = new Ajv({ allErrors: true })
@@ -26,7 +31,7 @@ const validateRegisterRequest = (req: Request, res: Response, next: NextFunction
 
   if (!isDTOValid) {
     const errorObject = {
-      errors: dtoValidator.errors?.map(error => ({ field: error.params.missingProperty ?? error.instancePath.substring(1), message: error.message }))
+      errors: dtoValidator.errors!.map(error => ({ field: error.params.missingProperty ?? error.instancePath.substring(1), message: error.message }))
     }
 
     return res.status(400).send(errorObject)

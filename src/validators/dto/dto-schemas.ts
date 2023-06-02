@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox'
 
-export const _id = Type.String({
+export const idDTOSchema = Type.String({
   format: 'uuid',
   errorMessage: {
     type: 'Invalid type error, must be a string',
@@ -8,7 +8,7 @@ export const _id = Type.String({
   }
 })
 
-export const name = Type.String({
+export const nameDTOSchema = Type.String({
   minLength: 2,
   maxLength: 20,
   errorMessage: {
@@ -18,7 +18,7 @@ export const name = Type.String({
   }
 })
 
-export const middleName = Type.String({
+export const middleNameDTOSchema = Type.String({
   minLength: 2,
   maxLength: 20,
   errorMessage: {
@@ -28,7 +28,7 @@ export const middleName = Type.String({
   }
 })
 
-export const lastName = Type.String({
+export const lastNameDTOSchema = Type.String({
   minLength: 2,
   maxLength: 20,
   errorMessage: {
@@ -38,7 +38,7 @@ export const lastName = Type.String({
   }
 })
 
-export const email = Type.String({
+export const emailDTOSchema = Type.String({
   format: 'email',
   errorMessage: {
     type: 'Invalid type error, must be a string',
@@ -46,7 +46,7 @@ export const email = Type.String({
   }
 })
 
-export const password = Type.String({
+export const passwordDTOSchema = Type.String({
   format: 'password',
   minLength: 10,
   maxLength: 25,

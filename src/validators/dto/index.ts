@@ -1,0 +1,6 @@
+export { default as validateLoginRequest } from './user-login.dto'
+export { default as validateRegisterRequest } from './user-register.dto'
+export { default as validateUpdateDataRequest } from './user-update-data.dto'
+export { default as validateUpdateEmailRequest } from './user-update-email.dto'
+export { default as validateUpdatePasswordRequest } from './user-update-password.dto'
+export { default as validateUnregisterRequest } from './user-unregister.dto'

@@ -23,7 +23,7 @@ addErrors(ajv)
 
 const dtoValidator = ajv.compile(UpdateDataDTOSchema)
 
-const validateUpdateDataRequest = (
+const validateUpdateDataDTO = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -45,4 +45,4 @@ const validateUpdateDataRequest = (
   return undefined
 }
 
-export default validateUpdateDataRequest
+export default validateUpdateDataDTO

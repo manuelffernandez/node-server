@@ -35,7 +35,7 @@ addErrors(ajv)
 
 const dtoValidator = ajv.compile(RegisterDTOSchema)
 
-const validateRegisterRequest = (
+const validateRegisterDTO = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -57,4 +57,4 @@ const validateRegisterRequest = (
   return undefined
 }
 
-export default validateRegisterRequest
+export default validateRegisterDTO

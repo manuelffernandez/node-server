@@ -26,7 +26,7 @@ addErrors(ajv)
 
 const dtoValidator = ajv.compile(UpdateEmailDTOSchema)
 
-const validateUpdateEmailRequest = (
+const validateUpdateEmailDTO = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -48,4 +48,4 @@ const validateUpdateEmailRequest = (
   return undefined
 }
 
-export default validateUpdateEmailRequest
+export default validateUpdateEmailDTO

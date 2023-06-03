@@ -24,7 +24,7 @@ addErrors(ajv)
 
 const dtoValidator = ajv.compile(UpdatePasswordDTOSchema)
 
-const validateUpdatePasswordRequest = (
+const validateUpdatePasswordDTO = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -46,4 +46,4 @@ const validateUpdatePasswordRequest = (
   return undefined
 }
 
-export default validateUpdatePasswordRequest
+export default validateUpdatePasswordDTO

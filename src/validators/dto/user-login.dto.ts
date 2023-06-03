@@ -26,11 +26,7 @@ addErrors(ajv)
 
 const dtoValidator = ajv.compile(LoginDTOSchema)
 
-const validateLoginRequest = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const validateLoginDTO = (req: Request, res: Response, next: NextFunction) => {
   const isDTOValid = dtoValidator(req.body)
 
   if (!isDTOValid) {
@@ -48,4 +44,4 @@ const validateLoginRequest = (
   return undefined
 }
 
-export default validateLoginRequest
+export default validateLoginDTO

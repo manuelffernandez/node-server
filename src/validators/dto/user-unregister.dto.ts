@@ -23,7 +23,7 @@ addErrors(ajv)
 
 const dtoValidator = ajv.compile(UnregisterDTOSchema)
 
-const validateUnregisterRequest = (
+const validateUnregisterDTO = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -45,4 +45,4 @@ const validateUnregisterRequest = (
   return undefined
 }
 
-export default validateUnregisterRequest
+export default validateUnregisterDTO

@@ -41,7 +41,6 @@ const validateLoginDTO = (req: Request, res: Response, next: NextFunction) => {
   }
 
   next()
-  return undefined
 }
 
 export default validateLoginDTO

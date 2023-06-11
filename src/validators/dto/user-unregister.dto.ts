@@ -42,7 +42,6 @@ const validateUnregisterDTO = (
   }
 
   next()
-  return undefined
 }
 
 export default validateUnregisterDTO

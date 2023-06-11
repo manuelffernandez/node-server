@@ -54,7 +54,6 @@ const validateRegisterDTO = (
   }
 
   next()
-  return undefined
 }
 
 export default validateRegisterDTO

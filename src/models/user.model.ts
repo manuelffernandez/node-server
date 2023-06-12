@@ -11,6 +11,6 @@ const userSchema = new Schema({
   updatedAt: { type: [Date], require: false }
 })
 
-const userModel = model('User', userSchema)
+const UserModel = model('User', userSchema)
 
-export default userModel
+export default UserModel

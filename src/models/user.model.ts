@@ -1,7 +1,17 @@
 import mongoose from 'mongoose'
 const { Schema, model } = mongoose
 
-const userSchema = new Schema({
+interface IUser {
+  _id: string
+  name: string
+  lastName: string
+  email: string
+  password: string
+  createdAt: Date
+  updatedAt: Date[]
+}
+
+const userSchema = new Schema<IUser>({
   _id: { type: String, _id: false, unique: true },
   name: { type: String, require: true, minLength: 2, maxLength: 20 },
   lastName: { type: String, require: true, minLength: 4, maxLength: 20 },

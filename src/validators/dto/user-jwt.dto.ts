@@ -5,7 +5,9 @@ const validateJWTDTO = (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers
 
   if (!authorization?.startsWith('Bearer ')) {
-    return res.status(401).send('Invalid token format')
+    return res
+      .status(401)
+      .send(`Invalid token format, 'Bearer' header required.`)
   }
 
   const encodedJWTKey = new TextEncoder().encode(process.env.JWT_PRIVATE_KEY)

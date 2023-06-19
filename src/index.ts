@@ -1,14 +1,19 @@
-import '@/configs/env'
+import connectDB from '@/configs/db'
+import { ENV_VARS, validateEnvVars } from '@/configs/env'
 import httpServer from '@/configs/http'
-import connectDB from './configs/db'
 
 const bootstrap = () => {
-  console.log('starting server...')
-  httpServer.listen(process.env.PORT, async () => {
-    await connectDB(process.env.MONGO_URL)
+  try {
+    validateEnvVars()
+    console.log('starting server...')
+    httpServer.listen(ENV_VARS.PORT, async () => {
+      await connectDB(ENV_VARS.MONGO_URL)
 
-    console.log('SERVER RUNNING ON PORT ' + process.env.PORT.toString())
-  })
+      console.log('SERVER RUNNING ON PORT ' + ENV_VARS.PORT)
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 bootstrap()

@@ -12,7 +12,7 @@ interface IUser {
 }
 
 const userSchema = new Schema<IUser>({
-  _id: { type: String, _id: false, unique: true },
+  _id: { type: String, _id: false },
   name: { type: String, require: true, minLength: 2, maxLength: 20 },
   lastName: { type: String, require: true, minLength: 4, maxLength: 20 },
   email: { type: String, require: true, unique: true },

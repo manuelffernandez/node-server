@@ -1,10 +1,19 @@
-import express from 'express'
-import * as dotenv from 'dotenv'
+import connectDB from '@/configs/db'
+import { ENV_VARS, validateEnvVars } from '@/configs/env'
+import httpServer from '@/configs/http'
 
-dotenv.config()
+const bootstrap = () => {
+  try {
+    validateEnvVars()
+    console.log('starting server...')
+    httpServer.listen(ENV_VARS.PORT, async () => {
+      await connectDB(ENV_VARS.MONGO_URL)
 
-const expressApp = express()
+      console.log('SERVER RUNNING ON PORT ' + ENV_VARS.PORT)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-expressApp.listen(process.env.PORT, () => {
-  console.log('SERVER RUNNING ON PORT  ' + process.env.PORT!.toString())
-})
+bootstrap()

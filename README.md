@@ -3,9 +3,29 @@
 ## Description
 
 It's a backend App developed with Node and Express to manage users for a fictional web application.
-The communication should be done via a **REST API (HTTP)**.
+The communication should be done via a **REST API (HTTP requests)**.
 
-[MongoDB](https://www.mongodb.com/) cloud database is used to store the data.
+## Features
+
+- **MongoDB**: This DBMS has been chosen due to its flexibility and scalability. [MongoDB](https://www.mongodb.com/) is a document-oriented NoSQL database that allows efficient storage and retrieval of data.
+
+- **Remote access**: The db is hosted in a remote environment. [Mongoose](https://mongoosejs.com/) package allows the app to communicate with it. To establish a remote connection proper configuration is required. It is essential to define the environment variables to successfully establish the connection. This is further explained later in this README.
+
+- **Data model**: By the moment only one entity was created, the 'user'. This db is designed to store data related to the application users. It includes fields like name, surname, email, password, creation and update date. It could be extended as necessary.
+
+- **CRUD**: It let perform CRUD operations over the user registers.
+
+## Specifications
+
+The will be able to...
+
+- Register in the application by entering the necessary information.
+  - The email must be unique per user.
+- Authenticate with the application using their email and password.
+  - If the authentication is valid, the application will return an identifier that will serve to prove their identity to the application when they want to make changes to their data
+- Obtain all of their data, excluding their password, by utilizing their identifier.
+- Update their data by utilizing their identifier.
+- Delete all of their data (unregister).
 
 ## Run locally
 

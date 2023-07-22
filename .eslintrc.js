@@ -4,7 +4,7 @@ module.exports = {
     es2021: true,
     node: true
   },
-  extends: 'standard-with-typescript',
+  extends: ['standard-with-typescript', 'eslint-config-prettier'],
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -13,6 +13,8 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off'
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/strict-boolean-expressions': 'off',
+    '@typescript-eslint/no-misused-promises': 'off'
   }
 }

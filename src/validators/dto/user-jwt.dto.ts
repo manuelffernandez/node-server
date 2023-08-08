@@ -4,22 +4,31 @@ import { jwtVerify } from 'jose'
 const validateJWTDTO = (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers
 
-  if (!authorization?.startsWith('Bearer ')) {
-    return res
-      .status(401)
-      .send(`Invalid token format, 'Bearer' header required.`)
+  if (!authorization) {
+    return res.status(400).send(`Missing 'authorization' header`)
   }
+
+  if (!authorization.startsWith('Bearer ')) {
+    return res
+      .status(400)
+      .send(
+        `Invalid token format, 'Bearer' prefix on authorization header required.`
+      )
+  }
+
+  const indexStartToken = 7
+  const token = authorization.slice(indexStartToken)
 
   const encodedJWTKey = new TextEncoder().encode(process.env.JWT_PRIVATE_KEY)
 
-  jwtVerify(authorization, encodedJWTKey)
+  jwtVerify(token, encodedJWTKey)
     .then(jwtVerifyResult => {
       const { payload } = jwtVerifyResult
 
       if (!payload.id) {
         return res.status(401).send('Missing user ID in token payload')
       }
-      Object.defineProperty(req, 'id', payload.id)
+      Object.defineProperty(req, 'id', { value: payload.id, enumerable: true })
 
       next()
     })

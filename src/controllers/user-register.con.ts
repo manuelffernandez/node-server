@@ -2,8 +2,8 @@ import type { RegisterDTOType } from '@/types'
 import type { Request, Response } from 'express'
 import UserModel from '@/models/user.model'
 import { hash } from 'bcrypt'
-import generateUniqueID from '@/helpers/idGenerator'
-import verifyEmailInDB from '@/helpers/verifyEmail'
+import generateUniqueID from '@/helpers/id-generator'
+import verifyEmailInDB from '@/helpers/verify-email'
 import { generalError } from '@/errors/GeneralError'
 
 const userRegisterController = async (

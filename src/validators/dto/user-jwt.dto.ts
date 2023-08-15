@@ -28,7 +28,10 @@ const validateJWTDTO = (req: Request, res: Response, next: NextFunction) => {
       if (!payload.id) {
         return res.status(401).send('Missing user ID in token payload')
       }
-      Object.defineProperty(req, 'id', { value: payload.id, enumerable: true })
+      Object.defineProperty(req.body, 'id', {
+        value: payload.id,
+        enumerable: true
+      })
 
       next()
     })

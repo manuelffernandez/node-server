@@ -2,8 +2,11 @@ import UserModel from '@/models/user.model'
 import type { JWTValidatedRequest } from '@/types'
 import type { Request, Response } from 'express'
 
-const userProfileController = async (req: Request, res: Response) => {
-  const { id } = req as unknown as JWTValidatedRequest
+const userProfileController = async (
+  req: Request<any, any, JWTValidatedRequest>,
+  res: Response
+) => {
+  const { id } = req.body
 
   try {
     const userById = await UserModel.findById(id).exec()

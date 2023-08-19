@@ -1,8 +1,10 @@
 import type { RegisterDTOType } from '@/types'
 import type { Request, Response } from 'express'
 import UserModel from '@/models/user.model'
-import { hash } from 'bcrypt'
-import { v4 as uuidv4 } from 'uuid'
+import hashPassword from '@/helpers/hash-password'
+import generateUniqueID from '@/helpers/id-generator'
+import verifyEmailInDB from '@/helpers/verify-email'
+import { generalError } from '@/errors/GeneralError'
 
 const userRegisterController = async (
   req: Request<any, any, RegisterDTOType>,
@@ -11,15 +13,15 @@ const userRegisterController = async (
   const { email, lastName, name, password } = req.body
 
   try {
-    const hashedPass = await hash(password, 10)
+    const hashedPass = await hashPassword(password)
 
-    const _id = uuidv4()
-    const userById = await UserModel.findById(_id).exec()
-    if (userById) return res.status(409).send('Conflict: ID collision')
+    const _id = await generateUniqueID()
 
-    const userByEmail = await UserModel.findOne({ email }).exec()
-    if (userByEmail)
-      return res.status(409).send('Conflict: Email already exists')
+    const isEmailRegistered = await verifyEmailInDB(email)
+    if (isEmailRegistered)
+      return res
+        .status(409)
+        .json(generalError('Conflict: Email already registered'))
 
     const newUser = new UserModel({
       _id,

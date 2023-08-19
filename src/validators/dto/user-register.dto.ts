@@ -9,6 +9,7 @@ import {
   nameDTOSchema,
   passwordDTOSchema
 } from './dto-schemas'
+import { getErrors } from '@/helpers/dto-error'
 
 export const RegisterDTOSchema = Type.Object(
   {
@@ -41,14 +42,8 @@ const validateRegisterDTO = (
   const isDTOValid = dtoValidator(req.body)
 
   if (!isDTOValid) {
-    const errorObject = {
-      errors: dtoValidator.errors!.map(error => ({
-        field: error.params.missingProperty ?? error.instancePath.substring(1),
-        message: error.message
-      }))
-    }
-
-    return res.status(400).send(errorObject)
+    const errorObject = getErrors(dtoValidator.errors!)
+    return res.status(400).json(errorObject)
   }
 
   next()

@@ -1,7 +1,9 @@
+import { getErrors } from '@/helpers/dto-error'
+import type { CustomRequest, JWTValidatedRequest } from '@/types'
 import { Type } from '@sinclair/typebox'
 import Ajv from 'ajv'
 import addErrors from 'ajv-errors'
-import type { NextFunction, Request, Response } from 'express'
+import type { NextFunction, Response } from 'express'
 import { passwordDTOSchema } from './dto-schemas'
 
 export const UnregisterDTOSchema = Type.Object(
@@ -12,7 +14,7 @@ export const UnregisterDTOSchema = Type.Object(
     additionalProperties: false,
     errorMessage: {
       additionalProperties:
-        'Invalid format error, contains unrecognized additional properties'
+        "'Invalid format' error. Contains unrecognized additional properties"
     }
   }
 )
@@ -24,21 +26,15 @@ addErrors(ajv)
 const dtoValidator = ajv.compile(UnregisterDTOSchema)
 
 const validateUnregisterDTO = (
-  req: Request,
+  req: CustomRequest<JWTValidatedRequest, any>,
   res: Response,
   next: NextFunction
 ) => {
   const isDTOValid = dtoValidator(req.body)
 
   if (!isDTOValid) {
-    const errorObject = {
-      errors: dtoValidator.errors!.map(error => ({
-        field: error.params.missingProperty ?? error.instancePath.substring(1),
-        message: error.message
-      }))
-    }
-
-    return res.status(400).send(errorObject)
+    const errorObject = getErrors(dtoValidator.errors!)
+    return res.status(400).json(errorObject)
   }
 
   next()

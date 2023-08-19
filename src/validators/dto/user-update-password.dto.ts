@@ -1,8 +1,10 @@
+import { getErrors } from '@/helpers/dto-error'
+import type { CustomRequest, JWTValidatedRequest } from '@/types'
 import { passwordDTOSchema } from '@/validators/dto/dto-schemas'
 import { Type } from '@sinclair/typebox'
 import Ajv from 'ajv'
 import addErrors from 'ajv-errors'
-import type { NextFunction, Request, Response } from 'express'
+import type { NextFunction, Response } from 'express'
 
 export const UpdatePasswordDTOSchema = Type.Object(
   {
@@ -25,25 +27,18 @@ addErrors(ajv)
 const dtoValidator = ajv.compile(UpdatePasswordDTOSchema)
 
 const validateUpdatePasswordDTO = (
-  req: Request,
+  req: CustomRequest<JWTValidatedRequest, any>,
   res: Response,
   next: NextFunction
 ) => {
   const isDTOValid = dtoValidator(req.body)
 
   if (!isDTOValid) {
-    const errorObject = {
-      errors: dtoValidator.errors?.map(error => ({
-        field: error.params.missingProperty ?? error.instancePath.substring(1),
-        message: error.message
-      }))
-    }
-
-    return res.status(400).send(errorObject)
+    const errorObject = getErrors(dtoValidator.errors!)
+    return res.status(400).json(errorObject)
   }
 
   next()
-  return undefined
 }
 
 export default validateUpdatePasswordDTO

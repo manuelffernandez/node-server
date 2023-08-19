@@ -1,3 +1,4 @@
+import { getErrors } from '@/helpers/dto-error'
 import { emailDTOSchema, passwordDTOSchema } from '@/validators/dto/dto-schemas'
 import { Type } from '@sinclair/typebox'
 import Ajv from 'ajv'
@@ -30,14 +31,8 @@ const validateLoginDTO = (req: Request, res: Response, next: NextFunction) => {
   const isDTOValid = dtoValidator(req.body)
 
   if (!isDTOValid) {
-    const errorObject = {
-      errors: dtoValidator.errors?.map(error => ({
-        field: error.params.missingProperty ?? error.instancePath.substring(1),
-        message: error.message
-      }))
-    }
-
-    return res.status(400).send(errorObject)
+    const errorObject = getErrors(dtoValidator.errors!)
+    return res.status(400).json(errorObject)
   }
 
   next()

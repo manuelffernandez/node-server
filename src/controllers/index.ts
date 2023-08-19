@@ -1,3 +1,7 @@
 export { default as userRegisterController } from './user-register.con'
 export { default as userLoginController } from './user-login.con'
 export { default as userProfileController } from './user-profile.con'
+export { default as userUpdateDataController } from './user-update-data.con'
+export { default as userUpdateEmailController } from './user-update-email.con'
+export { default as userUpdatePasswordController } from './user-update-password.con'
+export { default as userUnregisterController } from './user-unregister.con'

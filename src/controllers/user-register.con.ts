@@ -1,7 +1,7 @@
 import type { RegisterDTOType } from '@/types'
 import type { Request, Response } from 'express'
 import UserModel from '@/models/user.model'
-import { hash } from 'bcrypt'
+import hashPassword from '@/helpers/hash-password'
 import generateUniqueID from '@/helpers/id-generator'
 import verifyEmailInDB from '@/helpers/verify-email'
 import { generalError } from '@/errors/GeneralError'
@@ -13,7 +13,7 @@ const userRegisterController = async (
   const { email, lastName, name, password } = req.body
 
   try {
-    const hashedPass = await hash(password, 10)
+    const hashedPass = await hashPassword(password)
 
     const _id = await generateUniqueID()
 

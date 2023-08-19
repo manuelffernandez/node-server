@@ -1,12 +1,12 @@
 import UserModel from '@/models/user.model'
-import type { JWTValidatedRequest } from '@/types'
-import type { Request, Response } from 'express'
+import type { CustomRequest, JWTValidatedRequest } from '@/types'
+import type { Response } from 'express'
 
 const userProfileController = async (
-  req: Request<any, any, JWTValidatedRequest>,
+  req: CustomRequest<JWTValidatedRequest, undefined>,
   res: Response
 ) => {
-  const { id } = req.body
+  const { id } = req.locals!
 
   try {
     const userById = await UserModel.findById(id).exec()

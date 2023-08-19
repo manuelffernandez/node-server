@@ -1,6 +1,6 @@
+import verifyPassword from '@/helpers/verify-password'
 import UserModel from '@/models/user.model'
 import type { RegisterDTOType } from '@/types'
-import { compare } from 'bcrypt'
 import type { Request, Response } from 'express'
 import { SignJWT } from 'jose'
 
@@ -14,7 +14,7 @@ const userLoginController = async (
     const userByEmail = await UserModel.findOne({ email }).exec()
     if (!userByEmail) return res.status(403).send('Invalid credentials')
 
-    const isPassCorrect = await compare(password, userByEmail.password)
+    const isPassCorrect = await verifyPassword(password, userByEmail.password)
     if (!isPassCorrect) return res.status(403).send('Invalid credentials')
 
     const encodedJWTKey = new TextEncoder().encode(process.env.JWT_PRIVATE_KEY)

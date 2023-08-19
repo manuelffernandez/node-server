@@ -1,9 +1,11 @@
+import { getErrors } from '@/helpers/dto-error'
+import type { CustomRequest, JWTValidatedRequest } from '@/types'
 import { emailDTOSchema, passwordDTOSchema } from '@/validators/dto/dto-schemas'
 import { Type } from '@sinclair/typebox'
 import Ajv from 'ajv'
 import addErrors from 'ajv-errors'
 import addFormats from 'ajv-formats'
-import type { NextFunction, Request, Response } from 'express'
+import type { NextFunction, Response } from 'express'
 
 export const UpdateEmailDTOSchema = Type.Object(
   {
@@ -27,25 +29,18 @@ addErrors(ajv)
 const dtoValidator = ajv.compile(UpdateEmailDTOSchema)
 
 const validateUpdateEmailDTO = (
-  req: Request,
+  req: CustomRequest<JWTValidatedRequest, any>,
   res: Response,
   next: NextFunction
 ) => {
   const isDTOValid = dtoValidator(req.body)
 
   if (!isDTOValid) {
-    const errorObject = {
-      errors: dtoValidator.errors?.map(error => ({
-        field: error.params.missingProperty ?? error.instancePath.substring(1),
-        message: error.message
-      }))
-    }
-
-    return res.status(400).send(errorObject)
+    const errorObject = getErrors(dtoValidator.errors!)
+    return res.status(400).json(errorObject)
   }
 
   next()
-  return undefined
 }
 
 export default validateUpdateEmailDTO

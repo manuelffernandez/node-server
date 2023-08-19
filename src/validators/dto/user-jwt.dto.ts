@@ -1,4 +1,4 @@
-import { type Request, type Response, type NextFunction } from 'express'
+import type { NextFunction, Request, Response } from 'express'
 import { jwtVerify } from 'jose'
 
 const validateJWTDTO = (req: Request, res: Response, next: NextFunction) => {
@@ -28,8 +28,8 @@ const validateJWTDTO = (req: Request, res: Response, next: NextFunction) => {
       if (!payload.id) {
         return res.status(401).send('Missing user ID in token payload')
       }
-      Object.defineProperty(req.body, 'id', {
-        value: payload.id,
+      Object.defineProperty(req, 'locals', {
+        value: { id: payload.id },
         enumerable: true
       })
 

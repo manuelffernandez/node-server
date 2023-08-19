@@ -2,8 +2,7 @@
 
 ## Description
 
-It's a backend App developed with Node and Express to manage users for a fictional web application.
-The communication should be done via a **REST API (HTTP requests)**.
+This project is based on a NodeJS tutorial of [Desarrollo Útil](https://www.youtube.com/@DesarrolloUtil) YouTube channel. It's a **REST API** that manage CRUD users for a fictional web app, and it's developed with NodeJS and Express.
 
 ## Features
 
@@ -15,9 +14,11 @@ The communication should be done via a **REST API (HTTP requests)**.
 
 - **CRUD**: It let perform CRUD operations over the user registers.
 
+- **Auth**: The authentication was made by implementing the [JWT](https://jwt.io/) standard.
+
 ## Specifications
 
-The will be able to...
+The user will be able to...
 
 - Register in the application by entering the necessary information.
   - The email must be unique per user.
@@ -32,7 +33,7 @@ The will be able to...
 #### NodeJS
 
 For this project I used v18.14.2 of NodeJS. There is a _.nvmrc_ file to select the correct version with **nvm**.
-To do this in Windows open a PowerShell terminal in the project directory and run `nvm use $(Get-Content .nvmrc)`.
+To do this in Windows open a PowerShell terminal in the projects root directory and run `nvm use $(Get-Content .nvmrc)`.
 In Linux or Mac, open a terminal in the project directory and run `nvm use`.
 
 If you don't have nvm installed in your computer, ensure that you have that specific node version. You can check your Node version by running `node -v` in a terminal.
